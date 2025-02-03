@@ -23,8 +23,8 @@ class Robot(URRobot):
     and includes support for setting a reference coordinate system
     """
 
-    def __init__(self, host, use_rt=False, urFirm=None):
-        URRobot.__init__(self, host, use_rt, urFirm)
+    def __init__(self, host, use_rt=False):
+        URRobot.__init__(self, host, use_rt)
         self.csys = m3d.Transform()
 
     def _get_lin_dist(self, target):
@@ -208,7 +208,8 @@ class Robot(URRobot):
         return current transformation from tcp to current csys
         """
         t = self.get_pose(wait, _log)
-        return t.pose_vector.tolist()
+        # return t.pose_vector.tolist()
+        return t.pose_vector.get_array().tolist()
 
     def set_gravity(self, vector):
         if isinstance(vector, m3d.Vector):
